@@ -1,6 +1,6 @@
 # bf8b
 
-**B**aby's **F**irst **8**-**B**it computer.
+**B**aby's **F**irst **8**-**B**it computer. Now 16 bit.
 
 My first Verilog project. I have no idea what I'm doing.
 
@@ -16,14 +16,23 @@ My first Verilog project. I have no idea what I'm doing.
 
 | Mnemonic | Opcode | Description |
 |----------|--------|-------------|
-| JMP | `00 [5:0     ADDRESS]` | Jump to `0b00[ADDRESS]` |
-| LOD | `01 DST [4:0 ADDRESS]` | Load from memory address `0b111[ADDRESS]` into register `DST` |
-| STR | `10 SRC [4:0 ADDRESS]` | Store from register `SRC` to memory at `0b111[ADDRESS]` |
-| ADD | `11 DST x  x  x  x  x` | Add `a` and `b` and store in `DST` |
+| JMP | `    0000     x  x  x  x  [7:0          ADDRESS]` | Jump to `0b[ADDRESS]` |
+| LOD | `    0001        DEST     [7:0          ADDRESS]` | Load from memory address `0b[ADDRESS]` into register `DEST` |
+| STR | `    0010        SRC1     [7:0          ADDRESS]` | Store from register `SRC1` to memory at `0b111[ADDRESS]` |
+| ADD | `    0011        DEST        SRC1        SRC2   ` | Add `SRC1` and `SRC2` and store in `DEST` |
+| ADI | `    0011        DEST        SRC1     x  x  x  x` | Add `SRC1` and content of memory address `0b[ADDRESS]` and store in `DEST` |
+| LDI | `    0101        DEST     x  x  x  x  x  x  x  x` |
+| NDR | `    0110        DEST        SRC1        SRC2   ` | Bitwise NAND of `SRC1` and `SRC2` to be stored in `DEST` |
+| JEZ | `    0111        SRC1     [7:0           ADDESS]` | Conditional jump to `0b[ADDRESS]`, provided `SRC1 == 0` |
 
-For `DST`/`SRC`:
-- `a` = 0
-- `b` = 1
+For `DEST`/`SRC1`/`SRC2` (Merely rudimentary):
+- `a` = 0000
+- `b` = 0001
+- `c` = 0010 (loop register?)
+- `d` = 0011
+- `e` = 0100
+- `f` = 0101 (flag register?)
+- `g` = 0111
 
 ## Programming
 
