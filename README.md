@@ -20,7 +20,7 @@ My first Verilog project. I have no idea what I'm doing.
 | LOD | `    0001        DEST     [7:0          ADDRESS]` | Load from memory address `0b[ADDRESS]` into register `DEST` |
 | STR | `    0010        SRC1     [7:0          ADDRESS]` | Store from register `SRC1` to memory at `0b111[ADDRESS]` |
 | ADD | `    0011        DEST        SRC1        SRC2   ` | Add `SRC1` and `SRC2` and store in `DEST` |
-| ADI | `    0011        DEST        SRC1     x  x  x  x` | Add `SRC1` and content of memory address `0b[ADDRESS]` and store in `DEST` |
+| ADI | `    0100        DEST        SRC1     x  x  x  x` | Add `SRC1` and content of memory address `0b[ADDRESS]` and store in `DEST` |
 | LDI | `    0101        DEST     x  x  x  x  x  x  x  x` |
 | NDR | `    0110        DEST        SRC1        SRC2   ` | Bitwise NAND of `SRC1` and `SRC2` to be stored in `DEST` |
 | JEZ | `    0111        SRC1     [7:0           ADDESS]` | Conditional jump to `0b[ADDRESS]`, provided `SRC1 == 0` |
