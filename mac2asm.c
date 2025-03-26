@@ -28,11 +28,12 @@ int isValidNumber(const char *str) {
 }
 
 // Function to remove punctuation from string (to be edited)
+// Yet to be called in main()
 void removePunctuation(char *str) {
     char *src = str, *dst = str;
     while (*src) {
-        if (isalnum(*src) || *src == ',') {
-            *dst++ = *src; // commaPos does this as of now, only needed for second word in line
+        if (isalnum(*src) || *src == ',' || *src == ' ') {
+            *dst++ = *src; // Takes care of any punctuation to be removed
         }
         src++;
     }
@@ -97,10 +98,6 @@ int main() {
             fclose(outputFile);
             return 1;
         }
-
-        // Remove comma from second word
-        char *commaPos = strchr(word2, ',');
-        if (commaPos) *commaPos = '\0';
 
         // Map words to numbers or validate numbers
         num1 = mapWordToNumber(word1);
