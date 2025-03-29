@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 
 // Commented out but just in case I need it later
 // char jmp[3] = "jmp"; char a[2] = "a";

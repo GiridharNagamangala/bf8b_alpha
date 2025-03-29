@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 
 void convert_base(const char *input, int base_in, int base_out, char *output) {
     // Step 1: Convert input string (base_in) to long int
