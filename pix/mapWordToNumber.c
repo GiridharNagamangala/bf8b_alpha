@@ -13,7 +13,7 @@
 // char jez[3] = "jez"; char h[2] = "h";
 
 // Function to map words to their corresponding numbers
-int mapWordToNumber(const char word[50]) {
+int mapWordToNumber(const char *word) {
     if (strcmp(word, "jmp") == 0 || strcmp(word, "a") == 0) return 0b0000;
     if (strcmp(word, "lod") == 0 || strcmp(word, "b") == 0) return 0b0001;
     if (strcmp(word, "add") == 0 || strcmp(word, "c") == 0) return 0b0010;
