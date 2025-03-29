@@ -3,7 +3,7 @@
 
 // Function to remove punctuation from string (to be edited)
 // Yet to be called in main()
-void removePunctuation(char *string) {
+void removeWhiteSpace(char *string) {
     char *src = string, *dst = string;
     while (*src) {
         if (isalnum(*src) || *src == ',' || *src == ' ') {
