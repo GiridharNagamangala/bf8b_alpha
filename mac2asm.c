@@ -6,7 +6,7 @@
 #include <string.h>
 #include <ctype.h>
 #include <math.h>
-//  #include "supf.h"
+#include "supf.h"
 
 // Function to map words to their corresponding numbers
 
