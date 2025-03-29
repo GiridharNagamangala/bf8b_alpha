@@ -16,8 +16,8 @@
 int mapWordToNumber(const char *word) {
     if (strcmp(word, "jmp") == 0 || strcmp(word, "a") == 0) return 0b0000;
     if (strcmp(word, "lod") == 0 || strcmp(word, "b") == 0) return 0b0001;
-    if (strcmp(word, "add") == 0 || strcmp(word, "c") == 0) return 0b0010;
-    if (strcmp(word, "str") == 0 || strcmp(word, "d") == 0) return 0b0011;
+    if (strcmp(word, "str") == 0 || strcmp(word, "c") == 0) return 0b0010;
+    if (strcmp(word, "add") == 0 || strcmp(word, "d") == 0) return 0b0011;
     if (strcmp(word, "adi") == 0 || strcmp(word, "e") == 0) return 0b0100;
     if (strcmp(word, "ldi") == 0 || strcmp(word, "f") == 0) return 0b0101;
     if (strcmp(word, "ndr") == 0 || strcmp(word, "g") == 0) return 0b0110;
