@@ -1,4 +1,5 @@
 void lowerCase(char *string);
+void removeComma(char *string);
 void removeWhiteSpace(char *string);
 int paramCount(char *string);
 int isValidNumber(const char *string);
