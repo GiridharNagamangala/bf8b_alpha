@@ -22,23 +22,26 @@ int main() {
 
     int choice;
     printf("Mode of input [Enter number]:\nType 1 for Console/Terminal\nType 2 to Upload pippadix assembly file\n");
+    choix:
     scanf("%d", &choice);
     if (choice != 1 && choice != 2) {
-        printf("Enter valid choice\n");
-        main();
+        printf("\nEnter valid choice\n");
+        goto choix;
     } else if (choice == 1) {
         // Code for console input
         // return 1 ಇದ್ದೆಲ್ಲೆಡೆ file close ಮಾಡದೆ, ಮರಳಿ user input ಪಡೆಯುವಂತಿರಬೇಕು
-        printf("Enter all commands in lowercase\nType 'exit' to exit program\n\n");
+        printf("\nEnter all commands in lowercase\nHit enter to exit program\n\n");
         
         char outputFileName[] = "pix_dump";
         FILE *outputFile;
         char *userin;
         outputFile = fopen(outputFileName, "wb");
         
-        while (userin != "exit") {
+        while (userin != "\0") {
+            rex:
             printf(">\t");
             scanf("%s", userin);
+            printf("\n");
 
             int num1, num2, num3, num4;
             int command = 0; // Binary word going here
@@ -53,17 +56,16 @@ int main() {
 
             if (num1 == -1) { // catch wrong syntax
                 fprintf(stderr, "Error: Syntax incorrect, word '%s'\n", temp);
-                fclose(outputFile);
-                return 1;
+                goto rex;
             }
             // Block for "add" and "ndr"
             else if (num1 == 0b0011 || num1 == 0b0110) {
                 while(temp != NULL) {
                     if (mapWordToNumber(temp) == -1) {
                         fprintf(stderr, "Error: Syntax incorrect, word '%s'\n", temp);
-                        fclose(outputFile);
-                        return 1;
+                        goto rex;
                     } else {
+                        removeComma(temp);
                         command += (command << 4) + mapWordToNumber(temp);
                         temp = strtok(NULL, delimiter);
                     }
@@ -73,13 +75,13 @@ int main() {
             // Block for "lod", "str" and "jez"
             else if (num1 == 0b0001 || num1 == 0b0010 || num1 == 0b0111) {
                 temp = strtok(NULL, delimiter);
+                removeComma(temp);
                 num2 = mapWordToNumber(temp);
                 temp = strtok(NULL, delimiter);
                 num3 = (int)temp; // Do I need binConverter.c?
                 if (num2 == -1 || num3 >= 256 || num3 < 0) {
                     fprintf(stderr, "Adressing out of bound\n");
-                    fclose(outputFile);
-                    return 1;
+                    goto rex;
                 } else {
                     command += (num1 << 12) + (num2 << 8) + (num3);
                 }
@@ -91,8 +93,7 @@ int main() {
                 num2 = (int)temp;
                 if (num2 >= 256 || num2 < 0) {
                     fprintf(stderr, "Error: Adressing out of bound\n");
-                    fclose(outputFile);
-                    return 1;
+                    goto rex;
                 }
                 command += (num1 << 12) + (num2);
             }
@@ -100,15 +101,16 @@ int main() {
             // Block for "adi"
             else if (num1 == 0b0100) {
                 temp = strtok(NULL, delimiter);
+                removeComma(temp);
                 num2 = mapWordToNumber(temp);
                 temp = strtok(NULL, delimiter);
+                removeComma(temp);
                 num3 = mapWordToNumber(temp);
                 temp = strtok(NULL, delimiter);
                 num4 = (int)temp;
                 if (num4 >= 16 || num4 < 0) {
                     fprintf(stderr, "Error: Adressing out of bound\n");
-                    fclose(outputFile);
-                    return 1;
+                    goto rex;
                 }
                 command += (num1 << 12) + (num2 << 8) + (num3 << 4) + num4;
             }
@@ -116,19 +118,18 @@ int main() {
             // Block for "ldi"
             else if (num1 == 0b0101) {
                 temp = strtok(NULL, delimiter);
+                removeComma(temp);
                 num2 = mapWordToNumber(temp);
                 temp = strtok(NULL, delimiter);
                 num3 = (int)temp;
                 if (num4 >= 256 || num4 < 0) {
                     fprintf(stderr, "Error: Adressing out of bound\n");
-                    fclose(outputFile);
-                    return 1;
+                    goto rex;
                 }
                 command += (num1 << 12) + (num2 << 8) + num3;
             }
 
             // Need to write to outputFile, command by command
-            // Need to account for comma (both removal and confirmation)
         }
         
         fclose(outputFile);
@@ -193,6 +194,7 @@ int main() {
                         fclose(outputFile);
                         return 1;
                     } else {
+                        removeComma(temp);
                         command += (command << 4) + mapWordToNumber(temp);
                         temp = strtok(NULL, delimiter);
                     }
@@ -202,6 +204,7 @@ int main() {
             // Block for "lod", "str" and "jez"
             else if (num1 == 0b0001 || num1 == 0b0010 || num1 == 0b0111) {
                 temp = strtok(NULL, delimiter);
+                removeComma(temp);
                 num2 = mapWordToNumber(temp);
                 temp = strtok(NULL, delimiter);
                 num3 = (int)temp; // Do I need binConverter.c?
@@ -231,8 +234,10 @@ int main() {
             // Block for "adi"
             else if (num1 == 0b0100) {
                 temp = strtok(NULL, delimiter);
+                removeComma(temp);
                 num2 = mapWordToNumber(temp);
                 temp = strtok(NULL, delimiter);
+                removeComma(temp);
                 num3 = mapWordToNumber(temp);
                 temp = strtok(NULL, delimiter);
                 num4 = (int)temp;
@@ -248,6 +253,7 @@ int main() {
             // Block for "ldi"
             else if (num1 == 0b0101) {
                 temp = strtok(NULL, delimiter);
+                removeComma(temp);
                 num2 = mapWordToNumber(temp);
                 temp = strtok(NULL, delimiter);
                 num3 = (int)temp;
