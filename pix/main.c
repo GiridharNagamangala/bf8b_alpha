@@ -129,10 +129,12 @@ int main() {
                 command += (num1 << 12) + (num2 << 8) + num3;
             }
 
-            // Need to write to outputFile, command by command
+            // Write to outputFile, command by command
+            fwrite(command, sizeof(command), 1, outputFile);
         }
         
         fclose(outputFile);
+        printf("\nBinary dump successful. Results written to: %s\n", outputFileName);
 
     } else if (choice == 2) {
         // Code for file upload
@@ -266,14 +268,14 @@ int main() {
                 command += (num1 << 12) + (num2 << 8) + num3;
             }
 
-            // Need to write to outputFile, command by command
-            // Need to account for comma (both removal and confirmation)
+            // Write to outputFile, command by command
+            fwrite(command, sizeof(command), 1, outputFile);
         }
         // Close files
         fclose(inputFile);
         fclose(outputFile);
 
-        printf("Processing complete. Results written to %s.\n", outputFileName);
+        printf("\nBinary dump successful. Results written to: %s\n", outputFileName);
     }
     return 0;
 }
