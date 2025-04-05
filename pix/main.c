@@ -23,11 +23,11 @@ int main() {
     int choice;
     printf("Mode of input [Enter number]:\nType 1 for Console/Terminal\nType 2 to Upload pippadix assembly file\n");
     choix:
-    scanf("%d", &choice);
-    if (choice != 1 && choice != 2) {
+    scanf('%d', &choice);
+    if (choice != '1' && choice != '2') {
         printf("\nEnter valid choice\n");
         goto choix;
-    } else if (choice == 1) {
+    } else if (choice == '1') {
         // Code for console input
         // return 1 ಇದ್ದೆಲ್ಲೆಡೆ file close ಮಾಡದೆ, ಮರಳಿ user input ಪಡೆಯುವಂತಿರಬೇಕು
         printf("\nEnter all commands in lowercase\nHit enter to exit program\n\n");
@@ -37,7 +37,7 @@ int main() {
         char *userin;
         outputFile = fopen(outputFileName, "wb");
         
-        while (userin != "\0") {
+        while (userin != '\0') {
             rex:
             printf(">\t");
             scanf("%s", userin);
@@ -78,7 +78,7 @@ int main() {
                 removeComma(temp);
                 num2 = mapWordToNumber(temp);
                 temp = strtok(NULL, delimiter);
-                num3 = (int)temp; // Do I need binConverter.c?
+                num3 = binConverter(temp);
                 if (num2 == -1 || num3 >= 256 || num3 < 0) {
                     fprintf(stderr, "Adressing out of bound\n");
                     goto rex;
@@ -90,7 +90,7 @@ int main() {
             // Block for "jmp"
             else if (num1 == 0b0000) {
                 temp = strtok(NULL, delimiter);
-                num2 = (int)temp;
+                num2 = binConverter(temp);
                 if (num2 >= 256 || num2 < 0) {
                     fprintf(stderr, "Error: Adressing out of bound\n");
                     goto rex;
@@ -107,7 +107,7 @@ int main() {
                 removeComma(temp);
                 num3 = mapWordToNumber(temp);
                 temp = strtok(NULL, delimiter);
-                num4 = (int)temp;
+                num4 = binConverter(temp);
                 if (num4 >= 16 || num4 < 0) {
                     fprintf(stderr, "Error: Adressing out of bound\n");
                     goto rex;
@@ -121,7 +121,7 @@ int main() {
                 removeComma(temp);
                 num2 = mapWordToNumber(temp);
                 temp = strtok(NULL, delimiter);
-                num3 = (int)temp;
+                num3 = binConverter(temp);
                 if (num4 >= 256 || num4 < 0) {
                     fprintf(stderr, "Error: Adressing out of bound\n");
                     goto rex;
@@ -209,7 +209,7 @@ int main() {
                 removeComma(temp);
                 num2 = mapWordToNumber(temp);
                 temp = strtok(NULL, delimiter);
-                num3 = (int)temp; // Do I need binConverter.c?
+                num3 = binConverter(temp);
                 if (num2 == -1 || num3 >= 256 || num3 < 0) {
                     fprintf(stderr, "Error: Syntax incorrect, line %d\n", index + 1);
                     fclose(inputFile);
@@ -223,7 +223,7 @@ int main() {
             // Block for "jmp"
             else if (num1 == 0b0000) {
                 temp = strtok(NULL, delimiter);
-                num2 = (int)temp;
+                num2 = binConverter(temp);
                 if (num2 >= 256 || num2 < 0) {
                     fprintf(stderr, "Error: Syntax incorrect, line %d\n", index + 1);
                     fclose(inputFile);
@@ -242,7 +242,7 @@ int main() {
                 removeComma(temp);
                 num3 = mapWordToNumber(temp);
                 temp = strtok(NULL, delimiter);
-                num4 = (int)temp;
+                num4 = binConverter(temp);
                 if (num4 >= 16 || num4 < 0) {
                     fprintf(stderr, "Error: Syntax incorrect, line %d\n", index + 1);
                     fclose(inputFile);
@@ -258,7 +258,7 @@ int main() {
                 removeComma(temp);
                 num2 = mapWordToNumber(temp);
                 temp = strtok(NULL, delimiter);
-                num3 = (int)temp;
+                num3 = binConverter(temp);
                 if (num4 >= 256 || num4 < 0) {
                     fprintf(stderr, "Error: Syntax incorrect, line %d\n", index + 1);
                     fclose(inputFile);

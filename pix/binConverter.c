@@ -1,8 +1,15 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <ctype.h>
+#include "supf.h"
 
-void convert_base(const char *input, int base_in, int base_out, char *output) {
+void convert_base(char *input, int base_in, int base_out, char *output) {
+    // Step 0: Get rid of punctuation and alphanumericals
+    int endie = endex(input);
+    if (input[3] == "'") {input += 3;}
+    if (isalpha(input[endie])) {input[endie - 1] = '\0';}
+    
     // Step 1: Convert input string (base_in) to long int
     char *endptr;
     long num = strtol(input, &endptr, base_in);
@@ -37,9 +44,10 @@ void convert_base(const char *input, int base_in, int base_out, char *output) {
 // Yet to add code here I'm just lazy
 char* binConverter(char *string) {
     char *outnum;
-    if (string[1] == "x" || string[-1] == "h") {convert_base(string, 16, 2, outnum);}
-    if (string[1] == "d" || string[-1] == "d") {convert_base(string, 10, 2, outnum);}
-    if (string[1] == "o" || string[-1] == "o") {convert_base(string, 8, 2, outnum);}
-    if (string[1] == "b" || string[-1] == "b") {convert_base(string, 2, 2, outnum);}
-    return outnum;
+    int i = endest(string);
+    if (string[1] == 'x' || string[i] == 'h') {convert_base(string, 16, 10, outnum);}
+    if (string[1] == 'd' || string[i] == 'd') {convert_base(string, 10, 10, outnum);}
+    if (string[1] == 'o' || string[i] == 'o') {convert_base(string, 8, 10, outnum);}
+    if (string[1] == 'b' || string[i] == 'b') {convert_base(string, 2, 10, outnum);}
+    return atoi(outnum);
 }
