@@ -1,4 +1,4 @@
-// ಸಂಗಣಕಯಂತ್ರದಿ ಚಲಿಸಲಾಗದಿನ್ನೂ.
+// Compiling but not executing. Where have I brought myself to.
 // Rudimentary file; to be updated
 
 #include <stdio.h>
