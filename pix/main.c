@@ -20,11 +20,12 @@ Function to count the number of words in a line
 
 int main() {
 
-    char* choice;
+    char choice[2];
     printf("Mode of input [Enter number]:\nType 1 for Console/Terminal\nType 2 to Upload pippadix assembly file\n");
     choix:
     scanf("%s", choice);
-    if (choice != "1" && choice != "2") {
+    choice[1] = '\0';
+    if (choice[0] != "1" && choice[0] != "2") {
         printf("\nEnter valid choice\n");
         goto choix;
     } else if (choice == "1") {
