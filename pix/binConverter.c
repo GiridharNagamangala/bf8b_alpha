@@ -7,7 +7,7 @@
 void convert_base(char *input, int base_in, int base_out, char *output) {
     // Step 0: Get rid of punctuation and alphanumericals
     int endie = endex(input);
-    if (input[3] == "'") {input += 3;}
+    if (input[3] == '\'') {input += 3;}
     if (isalpha(input[endie])) {input[endie - 1] = '\0';}
     
     // Step 1: Convert input string (base_in) to long int
@@ -42,9 +42,9 @@ void convert_base(char *input, int base_in, int base_out, char *output) {
 // Function to convert immediates and addresses to binary
 // Idea is to interpret base using any affix: 0x'-/-h, 0d'-/-d, 0o'-/-o or 0b'-/-b
 // Yet to add code here I'm just lazy
-char* binConverter(char *string) {
+int binConverter(char *string) {
     char *outnum;
-    int i = endest(string);
+    int i = endex(string);
     if (string[1] == 'x' || string[i] == 'h') {convert_base(string, 16, 10, outnum);}
     if (string[1] == 'd' || string[i] == 'd') {convert_base(string, 10, 10, outnum);}
     if (string[1] == 'o' || string[i] == 'o') {convert_base(string, 8, 10, outnum);}

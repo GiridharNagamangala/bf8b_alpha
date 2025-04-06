@@ -20,14 +20,14 @@ Function to count the number of words in a line
 
 int main() {
 
-    int choice;
+    char* choice;
     printf("Mode of input [Enter number]:\nType 1 for Console/Terminal\nType 2 to Upload pippadix assembly file\n");
     choix:
-    scanf('%d', &choice);
-    if (choice != '1' && choice != '2') {
+    scanf("%s", choice);
+    if (choice != "1" && choice != "2") {
         printf("\nEnter valid choice\n");
         goto choix;
-    } else if (choice == '1') {
+    } else if (choice == "1") {
         // Code for console input
         // return 1 ಇದ್ದೆಲ್ಲೆಡೆ file close ಮಾಡದೆ, ಮರಳಿ user input ಪಡೆಯುವಂತಿರಬೇಕು
         printf("\nEnter all commands in lowercase\nHit enter to exit program\n\n");
@@ -37,7 +37,7 @@ int main() {
         char *userin;
         outputFile = fopen(outputFileName, "wb");
         
-        while (userin != '\0') {
+        while (userin[0] != '\0') {
             rex:
             printf(">\t");
             scanf("%s", userin);
@@ -130,13 +130,15 @@ int main() {
             }
 
             // Write to outputFile, command by command
-            fwrite(command, sizeof(command), 1, outputFile);
+            char commandBuffer[17];
+            itoa(command, commandBuffer, 10);
+            fwrite(commandBuffer, sizeof(command), 1, outputFile); // Does itoa() work?
         }
         
         fclose(outputFile);
         printf("\nBinary dump successful. Results written to: %s\n", outputFileName);
 
-    } else if (choice == 2) {
+    } else if (choice == "2") {
         // Code for file upload
         char inputFileName[100], outputFileName[100];
         FILE *inputFile, *outputFile;
@@ -269,7 +271,9 @@ int main() {
             }
 
             // Write to outputFile, command by command
-            fwrite(command, sizeof(command), 1, outputFile);
+            char commandBuffer[17];
+            itoa(command, commandBuffer, 10);
+            fwrite(commandBuffer, sizeof(command), 1, outputFile); // Does itoa() work?
         }
         // Close files
         fclose(inputFile);
