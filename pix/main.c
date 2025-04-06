@@ -139,7 +139,7 @@ int main() {
         fclose(outputFile);
         printf("\nBinary dump successful. Results written to: %s\n", outputFileName);
 
-    } else if (choice == '2') {
+    } else if (choice[0] == '2') {
         // Code for file upload
         char inputFileName[100], outputFileName[100];
         FILE *inputFile, *outputFile;
