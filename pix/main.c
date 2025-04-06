@@ -25,10 +25,10 @@ int main() {
     choix:
     scanf("%s", choice);
     choice[1] = '\0';
-    if (choice[0] != "1" && choice[0] != "2") {
+    if (choice[0] != '1' && choice[0] != '2') {
         printf("\nEnter valid choice\n");
         goto choix;
-    } else if (choice == "1") {
+    } else if (choice[0] == '1') {
         // Code for console input
         // return 1 ಇದ್ದೆಲ್ಲೆಡೆ file close ಮಾಡದೆ, ಮರಳಿ user input ಪಡೆಯುವಂತಿರಬೇಕು
         printf("\nEnter all commands in lowercase\nHit enter to exit program\n\n");
@@ -139,7 +139,7 @@ int main() {
         fclose(outputFile);
         printf("\nBinary dump successful. Results written to: %s\n", outputFileName);
 
-    } else if (choice == "2") {
+    } else if (choice == '2') {
         // Code for file upload
         char inputFileName[100], outputFileName[100];
         FILE *inputFile, *outputFile;
